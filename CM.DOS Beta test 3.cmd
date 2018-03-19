@@ -583,7 +583,7 @@ echo 5) Exponent
 echo 6) Poly-numbered / Custom equation
 echo 7) Back to menu
 echo =========================================
-choice /c 123456>nul
+choice /c 1234567>nul
 if %errorlevel%==1 goto NUMBERSADD
 if %errorlevel%==2 goto NUMBERSSUB
 if %errorlevel%==3 goto NUMBERSMULTIPLY
