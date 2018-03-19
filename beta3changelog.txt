@@ -1,0 +1,23 @@
+BETA 3 CHANGELOG
+
+
+=======================================================================
+NEW FEATURES
+-Custom usernames
+-Custom passwords, finally
+-2 user support with guest session
+-Console startup, can be enabled in dev settings
+-Each user has their personal folder to open
+-CM.DOS now supports from windows vista on, instead of starting at 8.
+-Added custom equations to calculator.
+=======================================================================
+
+================================================================================================================
+BUGS FIXED
+-SystemFiles folder is now invisible due to the way CM.DOS handles usernames.
+-CMD now starts in the SYSTEM32 directory rather than SystemFiles.
+-If the file creator/explorer fails at changing paths or creating a file\folder, it displays an error message.
+-The help center now clears the screen before showing help messages. 
+-fixed a bug where people could bypass the login by inputting a certain string of text into the password input.
+================================================================================================================
+
