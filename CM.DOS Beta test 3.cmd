@@ -41,10 +41,10 @@ echo Let's get you set up.
 echo ======================
 echo.
 pause
-md .\"User 1 personal folder
+md .\"User 1 Personal Folder
 attrib +s +h +r .\"User 1 personal folder"
 popd
-nul>USER1FOLDERCLOSED
+type nul>USER1FOLDERCLOSED
 
 :userset
 cls
@@ -106,8 +106,8 @@ echo =====================================
 echo  Enter the password for %user1name%.
 echo =====================================
 set /p user1input=
-if %user1input%=="" goto user1login
 set user1input=%user1input:"=%
+if "%user1input%"=="" goto user1login
 (
     set /p =
     set /p user1pass=
@@ -122,8 +122,8 @@ echo =====================================
 echo  Enter the password for %user2name%.
 echo =====================================
 set /p user2input=
-if %user2input%=="" goto user2login
 set user2input=%user2input:"=%
+if "%user2input%"=="" goto user2login
 (
     set /p =
     set /p user2pass=
@@ -136,14 +136,14 @@ goto user2login
 if exist .\TEMPUSER1 del .\TEMPUSER1
 if exist .\TEMPUSER2 del .\TEMPUSER2
 if exist .\TEMPGUEST del .\TEMPGUEST
-nul> TEMPUSER1
+type nul> TEMPUSER1
 goto bgset1
 
 :2login
 if exist .\TEMPUSER1 del .\TEMPUSER1
 if exist .\TEMPUSER2 del .\TEMPUSER2
 if exist .\TEMPGUEST del .\TEMPGUEST
-nul> TEMPUSER2
+type nul> TEMPUSER2
 goto bgset2
 
 :bgset
@@ -152,24 +152,8 @@ if exist .\TEMPGUEST goto guestmenu
 ::background setting system
 :bgset1
 cls	
-if exist 1bg1 goto bg1
-if not exist 1bg1 goto 1bat2
-
-:1bat2
-if exist 1bg2 goto bg2
-if not exist 1bg2 goto 1bat3
-
-:1bat3
-if exist 1bg3 goto bg3
-if not exist 1bg3 goto 1bat4
-
-:1bat4
-if exist 1bg4 goto bg4
-if not exist 1bg4 goto 1bat5
-
-:1bat5
+for /L %%A in (1,1,4) do if exist 1bg%%A goto bg%%A
 if exist 1NOBG goto bg5
-if not exist 1NOBG goto 1choosebg
 
 ::this will make you choose the background if said files don't exist
 :1choosebg
@@ -187,46 +171,30 @@ if %errorlevel%==4 goto 1ch4
 if %errorlevel%==5 goto 1ch5
 
 :1ch1
-NUL>1bg1
+type NUL>1bg1
 goto bg1
 
 :1ch2
-NUL>1bg2
+type NUL>1bg2
 goto bg2
 
 :1ch3
-NUL>1bg3
+type NUL>1bg3
 goto bg3
 
 :1ch4
-NUL>1bg4
+type NUL>1bg4
 goto bg4
 
 :1ch5
-NUL>1NOBG
+type NUL>1NOBG
 cls
 goto menu
 
 :bgset2
 cls	
-if exist 2bg1 goto bg1
-if not exist 2bg1 goto 2bat2
-
-:2bat2
-if exist 2bg2 goto bg2
-if not exist 2bg2 goto 2bat3
-
-:2bat3
-if exist 2bg3 goto bg3
-if not exist 2bg3 goto 2bat4
-
-:2bat4
-if exist 2bg4 goto bg4
-if not exist 2bg4 goto 2bat5
-
-:2bat5
+for /L %%A in (1,1,4) do if exist 2bg%%A goto bg%%A
 if exist 2NOBG goto bg5
-if not exist 2NOBG goto 2choosebg
 
 ::this will make you choose the background if said files don't exist
 :2choosebg
@@ -244,23 +212,23 @@ if %errorlevel%==4 goto 2ch4
 if %errorlevel%==5 goto 2ch5
 
 :2ch1
-NUL>2bg1
+type NUL>2bg1
 goto bg1
 
 :2ch2
-NUL>2bg2
+type NUL>2bg2
 goto bg2
 
 :2ch3
-NUL>2bg3
+type NUL>2bg3
 goto bg3
 
 :2ch4
-NUL>2bg4
+type NUL>2bg4
 goto bg4
 
 :2ch5
-NUL>2NOBG
+type NUL>2NOBG
 cls
 goto menu
 
@@ -540,12 +508,12 @@ goto menu
 :LockPFolder
 if exist .\TEMPUSER2 set usernumber=2
 if exist .\TEMPUSER1 set usernumber=1
-if exist USER%usernumber%CLOSED (
+if exist USER%usernumber%FOLDERCLOSED (
 pushd ..
-attrib -s -h -r .\"User %usernumber% personal folder"
+attrib -s -h -r .\"User %usernumber% Personal Folder"
 popd
-del USER%usernumber%CLOSED
-nul>USER%usernumber%OPEN
+del USER%usernumber%FOLDERCLOSED
+type nul>USER%usernumber%FOLDEROPEN
 cls
 echo ======================================
 echo Folder unlocked.
@@ -554,12 +522,12 @@ echo ======================================
 pause>nul
 goto bgset
 )
-If exist USER%usernumber%OPEN (
+If exist USER%usernumber%FOLDEROPEN (
 pushd ..
-attrib +s +h +r .\"User %usernumber% personal folder"
+attrib +s +h +r .\"User %usernumber% Personal Folder"
 popd
-del USER%usernumber%OPEN
-nul>USER%usernumber%CLOSED
+del USER%usernumber%FOLDEROPEN
+type nul>USER%usernumber%FOLDERCLOSED
 cls
 echo ======================================
 echo Folder locked.
@@ -815,7 +783,7 @@ echo ====================================================
 echo choose the file extension for %filename%. (no dot!)
 echo ====================================================
 set /p fileextension=
-nul>"%filename%.%fileextension%"
+type nul>"%filename%.%fileextension%"
 cls
 if not exist .\"%filename%.%fileextension%" goto creationerror
 echo file created.
@@ -1014,22 +982,22 @@ if %errorlevel%==4 goto coloryellow
 if %errorlevel%==5 color f & goto bgset
 
 :colorred
-NUL>ColorRed
+type NUL>ColorRed
 Color C
 goto bgset
 
 :colorgreen
-NUL>ColorGreen
+type NUL>ColorGreen
 Color A
 goto bgset
 
 :colorblue
-NUL>ColorBlue
+type NUL>ColorBlue
 Color B
 goto bgset
 
 :coloryellow
-NUL>ColorYellow
+type NUL>ColorYellow
 Color E
 Goto bgset
 
@@ -1151,7 +1119,7 @@ pushd ..
 md .\"User 2 Personal Folder"
 attrib +s +h +r "User 2 Personal Folder"
 popd
-nul>USER2FOLDERCLOSED
+type nul>USER2FOLDERCLOSED
 :passset2
 cls
 echo =======================================
@@ -1205,7 +1173,7 @@ echo Are you sure you want to enable this? (Y/N)
 echo ===================================================
 choice>nul
 if %errorlevel%==2 goto bgset1
-nul>nologin.dev
+type nul>nologin.dev
 cls
 echo ====================================================
 echo Login skip activated. You can disable this anytime.
@@ -1319,7 +1287,7 @@ goto bgset
 if exist .\TEMPUSER1 del .\TEMPUSER1
 if exist .\TEMPUSER2 del .\TEMPUSER2
 if exist .\TEMPGUEST del .\TEMPGUEST
-nul>TEMPGUEST
+type nul>TEMPGUEST
 :guestmenu
 cls
 echo =============================
