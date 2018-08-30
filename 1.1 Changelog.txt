@@ -1,0 +1,13 @@
+CM.DOS
+Version 1.1 Expansion (Build 311)
+Changelog
+
+-Added new War game.
+-Added more color choices, and added Themes feature.
+-Added a lil easter egg.
+-Added error codes feature.
+-fixed some text here and there.
+-Added support for EXE add-ons.
+-Started testing a new system to add and download programs in a test OS called Loop. 
+-Added support for all browsers in search by changing the search system.
+-Added a new coffee mug background
